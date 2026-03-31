@@ -1325,6 +1325,123 @@ p { line-height: 1.6; color: var(--text-muted); }
 .post-action:hover { color: var(--lilac-500); }
 .post-action svg { width: 16px; height: 16px; }
 
+/* ── Profile View Page ── */
+.profile-hero {
+  text-align: center;
+  padding: 32px 20px 24px;
+}
+.profile-avatar-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lilac-400), var(--lilac-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 4px 20px rgba(155,89,182,0.2);
+}
+.profile-avatar-lg svg { width: 36px; height: 36px; color: #fff; }
+.profile-hero h2 { color: var(--lilac-700); margin-bottom: 4px; font-size: 1.4rem; }
+.profile-hero p { font-size: 0.85rem; }
+
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.profile-info-item {
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  text-align: center;
+}
+.profile-info-item small {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.profile-info-item span {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+/* Child Reserve Categories */
+.reserve-section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--lilac-700);
+  margin-bottom: 6px;
+}
+.reserve-section-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.reserve-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid rgba(155,89,182,0.1);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.reserve-card:hover {
+  border-color: rgba(155,89,182,0.25);
+  box-shadow: 0 2px 12px rgba(155,89,182,0.06);
+}
+.reserve-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.reserve-info { flex: 1; }
+.reserve-info h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 2px;
+}
+.reserve-info .reserve-age {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--lilac-500);
+  margin-bottom: 2px;
+}
+.reserve-info p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+.reserve-amount {
+  text-align: right;
+  flex-shrink: 0;
+}
+.reserve-amount strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+.reserve-amount small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
 /* ══════════════════════════════
    RESPONSIVE
    ══════════════════════════════ */
@@ -1832,6 +1949,154 @@ p { line-height: 1.6; color: var(--text-muted); }
 
 
 <!-- ╔══════════════════════════════╗
+     ║     MY PROFILE VIEW PAGE      ║
+     ╚══════════════════════════════╝ -->
+<div id="page-myprofile" class="page app-page">
+  <header class="app-topbar">
+    <div class="topbar-left">
+      <button class="nav-back" onclick="window.history.back()" style="width:40px;height:40px;border-radius:50%;border:none;background:rgba(155,89,182,0.08);color:var(--lilac-600);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="topbar-greeting">
+        <small>Minha conta</small>
+        <strong>Perfil</strong>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn" onclick="toggleNotifications()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-badge"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="app-content">
+    <!-- Profile Info -->
+    <div class="profile-hero">
+      <div class="profile-avatar-lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h2>Maria Silva</h2>
+      <p>Mãe de 2, construindo seu futuro</p>
+    </div>
+
+    <div class="profile-info-grid">
+      <div class="profile-info-item">
+        <small>Filhos</small>
+        <span>2 filhos</span>
+      </div>
+      <div class="profile-info-item">
+        <small>Guardando há</small>
+        <span>3 meses</span>
+      </div>
+      <div class="profile-info-item">
+        <small>Total guardado</small>
+        <span>R$ 4.782</span>
+      </div>
+      <div class="profile-info-item">
+        <small>Meta mensal</small>
+        <span>R$ 300</span>
+      </div>
+    </div>
+
+    <!-- Child Reserve Categories -->
+    <h3 class="reserve-section-title">Reservas para os filhos</h3>
+    <p class="reserve-section-sub">Cada fase da vida dos seus filhos merece um cuidado diferente. Veja como preparar o futuro deles.</p>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #fce7f3;">🌱</div>
+      <div class="reserve-info">
+        <h4>Semente</h4>
+        <span class="reserve-age">Gestação</span>
+        <p>Comece a plantar antes mesmo de chegar. Cada pouquinho conta.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 320</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #ede9fe;">🌿</div>
+      <div class="reserve-info">
+        <h4>Raiz</h4>
+        <span class="reserve-age">Recém-nascido até 2 anos</span>
+        <p>Fraldas, vacinas, enxoval. Uma base firme pro começo.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 1.280</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #d1fae5;">🌾</div>
+      <div class="reserve-info">
+        <h4>Broto</h4>
+        <span class="reserve-age">3 a 5 anos</span>
+        <p>Escolinha, roupinhas, primeiras descobertas. Tudo cresce rápido.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 850</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #fef3c7;">🌸</div>
+      <div class="reserve-info">
+        <h4>Florescer</h4>
+        <span class="reserve-age">6 a 9 anos</span>
+        <p>Material escolar, atividades, passeios. A fase de desabrochar.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 540</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #e0e7ff;">🏠</div>
+      <div class="reserve-info">
+        <h4>Abrigo</h4>
+        <span class="reserve-age">10 a 14 anos</span>
+        <p>Mais independência, mais gastos. Preparando o ninho pra adolescência.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 380</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #fae8ff;">🦋</div>
+      <div class="reserve-info">
+        <h4>Autonomia</h4>
+        <span class="reserve-age">15 a 18 anos</span>
+        <p>Cursinho, carteira, primeiro emprego. Pronta pra voar.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 200</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+
+    <div class="reserve-card">
+      <div class="reserve-icon" style="background: #f0fdf4;">🌳</div>
+      <div class="reserve-info">
+        <h4>Legado</h4>
+        <span class="reserve-age">Maior de 18 anos</span>
+        <p>Faculdade, primeiro apê, início de vida. O presente que fica.</p>
+      </div>
+      <div class="reserve-amount">
+        <strong>R$ 150</strong>
+        <small>guardado</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════╗
      ║   BOTTOM TAB BAR              ║
      ╚══════════════════════════════╝ -->
 <nav class="tab-bar" id="tab-bar">
@@ -1905,7 +2170,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 <div id="page-home" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
-      <a href="#profile" class="topbar-avatar">
+      <a href="#myprofile" class="topbar-avatar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <div class="topbar-greeting">
@@ -2018,7 +2283,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 <div id="page-chat" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
-      <a href="#profile" class="topbar-avatar">
+      <a href="#myprofile" class="topbar-avatar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <div class="topbar-greeting">
@@ -2088,7 +2353,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 <div id="page-search" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
-      <a href="#profile" class="topbar-avatar">
+      <a href="#myprofile" class="topbar-avatar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <div class="topbar-greeting">
@@ -2189,7 +2454,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 <div id="page-investments" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
-      <a href="#profile" class="topbar-avatar">
+      <a href="#myprofile" class="topbar-avatar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <div class="topbar-greeting">
@@ -2300,7 +2565,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 <div id="page-community" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
-      <a href="#profile" class="topbar-avatar">
+      <a href="#myprofile" class="topbar-avatar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
       <div class="topbar-greeting">
@@ -2438,7 +2703,7 @@ p { line-height: 1.6; color: var(--text-muted); }
 // ── Routing ──
 let currentStep = 1;
 const totalSteps = 4;
-const appPages = ['home', 'chat', 'search', 'investments', 'community'];
+const appPages = ['home', 'chat', 'search', 'investments', 'community', 'myprofile'];
 
 function navigateTo(page) {
   // Close notifications
