@@ -961,36 +961,369 @@ p { line-height: 1.6; color: var(--text-muted); }
 .summary-stat small { font-size: 0.68rem; color: var(--text-muted); display: block; margin-bottom: 2px; }
 .summary-stat span { font-size: 0.85rem; font-weight: 600; color: var(--lilac-600); }
 
-/* Placeholder page */
-.placeholder-page {
+/* ── Chat Page ── */
+.chat-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 60px 20px;
   flex: 1;
+  padding: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
-.placeholder-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 24px;
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+.chat-bubble {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  animation: fadeUp 0.3s ease both;
+}
+.chat-bubble.bot {
+  align-self: flex-start;
   background: var(--cream);
+  color: var(--text-light);
+  border-bottom-left-radius: 6px;
+}
+.chat-bubble.bot .bot-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--lilac-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  display: block;
+}
+.chat-bubble.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--lilac-500), var(--lilac-600));
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.chat-chip {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(155,89,182,0.2);
+  background: #fff;
+  font-size: 0.78rem;
+  color: var(--lilac-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chat-chip:hover {
+  background: var(--lilac-100);
+  border-color: var(--lilac-400);
+}
+.chat-input-bar {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  background: #fff;
+  border-top: 1px solid rgba(155,89,182,0.08);
+}
+.chat-input-bar input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: 1.5px solid rgba(155,89,182,0.2);
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-light);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.chat-input-bar input:focus { border-color: var(--lilac-500); }
+.chat-input-bar input::placeholder { color: rgba(107,82,128,0.4); }
+.chat-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--lilac-500), var(--lilac-600));
+  color: #fff;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.chat-send:hover { transform: scale(1.05); }
+.chat-send svg { width: 18px; height: 18px; }
+
+/* ── Search Page ── */
+.search-bar {
+  position: relative;
   margin-bottom: 20px;
 }
-.placeholder-icon svg { width: 36px; height: 36px; color: var(--lilac-500); }
-.placeholder-page h2 {
-  color: var(--lilac-700);
-  margin-bottom: 8px;
-  font-size: 1.3rem;
-}
-.placeholder-page p {
-  max-width: 280px;
+.search-bar input {
+  width: 100%;
+  padding: 14px 18px 14px 46px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(155,89,182,0.15);
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem;
+  color: var(--text-light);
+  outline: none;
+  transition: all 0.2s;
 }
+.search-bar input:focus { border-color: var(--lilac-500); background: #fff; }
+.search-bar input::placeholder { color: rgba(107,82,128,0.4); }
+.search-bar-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--lilac-400);
+}
+.filter-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.filter-pills::-webkit-scrollbar { display: none; }
+.pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(155,89,182,0.15);
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.pill.active, .pill:hover {
+  background: var(--lilac-100);
+  color: var(--lilac-700);
+  border-color: var(--lilac-400);
+}
+.search-result {
+  background: #fff;
+  border: 1px solid rgba(155,89,182,0.08);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.search-result:hover {
+  border-color: rgba(155,89,182,0.2);
+  box-shadow: 0 2px 12px rgba(155,89,182,0.06);
+}
+.search-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.search-result-header h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+.search-result-header .return-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #059669;
+  background: #d1fae5;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+.search-result p { font-size: 0.78rem; color: var(--text-muted); }
+.search-result-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.search-result-tags span {
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--cream);
+  color: var(--lilac-600);
+  font-weight: 600;
+}
+
+/* ── Investments Page ── */
+.portfolio-total {
+  text-align: center;
+  padding: 24px 0 20px;
+}
+.portfolio-total small {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.portfolio-total h2 {
+  color: var(--lilac-700);
+  font-size: 2rem;
+  margin: 4px 0;
+}
+.portfolio-total .portfolio-change {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #059669;
+}
+.portfolio-chart {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px 0 8px;
+  gap: 2px;
+}
+.portfolio-chart span { border-radius: 4px; }
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.holding-card {
+  background: #fff;
+  border: 1px solid rgba(155,89,182,0.08);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.holding-card:hover {
+  border-color: rgba(155,89,182,0.2);
+  box-shadow: 0 2px 12px rgba(155,89,182,0.06);
+}
+.holding-left h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+.holding-left p { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+.holding-right { text-align: right; }
+.holding-right strong { display: block; font-size: 0.92rem; color: var(--text-light); }
+.holding-right small { font-size: 0.75rem; color: #059669; font-weight: 600; }
+.holding-right small.negative { color: var(--error); }
+
+/* ── Community Page ── */
+.community-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(155,89,182,0.08);
+}
+.community-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.community-tab.active {
+  color: var(--lilac-600);
+  border-bottom-color: var(--lilac-500);
+}
+.post-card {
+  background: #fff;
+  border: 1px solid rgba(155,89,182,0.08);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.post-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.post-meta { flex: 1; }
+.post-meta strong { font-size: 0.85rem; color: var(--text-light); display: block; }
+.post-meta small { font-size: 0.7rem; color: var(--text-muted); }
+.post-body { font-size: 0.85rem; color: var(--text-light); line-height: 1.55; margin-bottom: 12px; }
+.post-actions {
+  display: flex;
+  gap: 20px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(155,89,182,0.06);
+}
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+}
+.post-action:hover { color: var(--lilac-500); }
+.post-action svg { width: 16px; height: 16px; }
 
 /* ══════════════════════════════
    RESPONSIVE
@@ -1679,6 +2012,9 @@ p { line-height: 1.6; color: var(--text-muted); }
 <!-- ╔══════════════════════════════╗
      ║       CHAT IA PAGE            ║
      ╚══════════════════════════════╝ -->
+<!-- ╔══════════════════════════════╗
+     ║       CHAT IA PAGE            ║
+     ╚══════════════════════════════╝ -->
 <div id="page-chat" class="page app-page">
   <header class="app-topbar">
     <div class="topbar-left">
@@ -1697,12 +2033,52 @@ p { line-height: 1.6; color: var(--text-muted); }
       </button>
     </div>
   </header>
-  <div class="app-content placeholder-page">
-    <div class="placeholder-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+
+  <div class="chat-container">
+    <div class="chat-messages">
+      <div class="chat-bubble bot">
+        <span class="bot-label">Bloom IA</span>
+        Olá, Maria! Sou sua assistente financeira. Posso te ajudar com dúvidas sobre investimentos, orçamento ou planejamento. O que gostaria de saber?
+        <div class="chat-suggestions">
+          <span class="chat-chip">Como montar minha reserva?</span>
+          <span class="chat-chip">O que é Tesouro Direto?</span>
+          <span class="chat-chip">Dicas para economizar</span>
+        </div>
+      </div>
+
+      <div class="chat-bubble user">
+        Como faço para começar a investir com pouco dinheiro?
+      </div>
+
+      <div class="chat-bubble bot">
+        <span class="bot-label">Bloom IA</span>
+        Ótima pergunta! Você pode começar com valores a partir de <strong>R$ 30</strong>. Aqui vão 3 passos simples:<br><br>
+        <strong>1.</strong> Monte sua reserva de emergência primeiro (Tesouro Selic ou CDB com liquidez diária)<br>
+        <strong>2.</strong> Defina quanto pode separar por mês — mesmo R$ 50 já faz diferença<br>
+        <strong>3.</strong> Comece pela renda fixa, que é mais segura e previsível<br><br>
+        Quer que eu te mostre opções para o seu perfil?
+      </div>
+
+      <div class="chat-bubble user">
+        Sim! Quero ver opções seguras
+      </div>
+
+      <div class="chat-bubble bot">
+        <span class="bot-label">Bloom IA</span>
+        Com base no seu perfil conservador, recomendo:<br><br>
+        🛡️ <strong>Tesouro Selic</strong> — rendendo 13,25% a.a., liquidez diária<br>
+        🏦 <strong>CDB Banco Digital</strong> — 14,5% a.a., protegido pelo FGC<br>
+        📈 <strong>LCI</strong> — 12,8% a.a., isenta de imposto de renda<br><br>
+        Todos são de baixo risco e ideais para quem está começando.
+      </div>
     </div>
-    <h2>Assistente Financeira</h2>
-    <p>Tire dúvidas sobre investimentos, orçamento e planejamento com nossa IA.</p>
+
+    <div class="chat-input-bar">
+      <input type="text" placeholder="Digite sua dúvida...">
+      <button class="chat-send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1727,12 +2103,89 @@ p { line-height: 1.6; color: var(--text-muted); }
       </button>
     </div>
   </header>
-  <div class="app-content placeholder-page">
-    <div class="placeholder-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+
+  <div class="app-content">
+    <div class="search-bar">
+      <svg class="search-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Buscar investimentos...">
     </div>
-    <h2>Pesquisar Investimentos</h2>
-    <p>Busque por tipo, rentabilidade, prazo e encontre o investimento ideal.</p>
+
+    <div class="filter-pills">
+      <span class="pill active">Todos</span>
+      <span class="pill">Renda Fixa</span>
+      <span class="pill">Tesouro</span>
+      <span class="pill">CDB</span>
+      <span class="pill">LCI/LCA</span>
+      <span class="pill">Fundos</span>
+      <span class="pill">Ações</span>
+    </div>
+
+    <p class="app-section-label">Mais populares</p>
+
+    <div class="search-result">
+      <div class="search-result-header">
+        <h4>Tesouro Selic 2029</h4>
+        <span class="return-tag">13,25% a.a.</span>
+      </div>
+      <p>Título público com liquidez diária. Ideal para reserva de emergência.</p>
+      <div class="search-result-tags">
+        <span>Renda Fixa</span>
+        <span>Liquidez Diária</span>
+        <span>Baixo Risco</span>
+      </div>
+    </div>
+
+    <div class="search-result">
+      <div class="search-result-header">
+        <h4>CDB Banco Inter</h4>
+        <span class="return-tag">14,5% a.a.</span>
+      </div>
+      <p>CDB pós-fixado com resgate a qualquer momento. Protegido pelo FGC.</p>
+      <div class="search-result-tags">
+        <span>CDB</span>
+        <span>Liquidez Diária</span>
+        <span>FGC</span>
+      </div>
+    </div>
+
+    <div class="search-result">
+      <div class="search-result-header">
+        <h4>LCI Banco do Brasil</h4>
+        <span class="return-tag">12,8% a.a.</span>
+      </div>
+      <p>Letra de crédito imobiliário isenta de IR para pessoa física.</p>
+      <div class="search-result-tags">
+        <span>LCI</span>
+        <span>Isenta IR</span>
+        <span>12 meses</span>
+      </div>
+    </div>
+
+    <div class="search-result">
+      <div class="search-result-header">
+        <h4>Tesouro Educa+ 2035</h4>
+        <span class="return-tag">IPCA+6,2%</span>
+      </div>
+      <p>Planeje a educação dos filhos com proteção contra inflação.</p>
+      <div class="search-result-tags">
+        <span>Tesouro</span>
+        <span>Longo Prazo</span>
+        <span>Educação</span>
+      </div>
+    </div>
+
+    <div class="search-result">
+      <div class="search-result-header">
+        <h4>Fundo DI Nubank</h4>
+        <span class="return-tag">13,1% a.a.</span>
+      </div>
+      <p>Fundo de renda fixa com diversificação automática. Mínimo R$ 1.</p>
+      <div class="search-result-tags">
+        <span>Fundo</span>
+        <span>Diversificado</span>
+        <span>Baixo Mínimo</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1757,12 +2210,93 @@ p { line-height: 1.6; color: var(--text-muted); }
       </button>
     </div>
   </header>
-  <div class="app-content placeholder-page">
-    <div class="placeholder-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 18V6"/></svg>
+
+  <div class="app-content">
+    <div class="portfolio-total">
+      <small>Patrimônio total</small>
+      <h2>R$ 4.782,30</h2>
+      <span class="portfolio-change">+R$ 127,45 (2,7%) este mês</span>
     </div>
-    <h2>Meus Investimentos</h2>
-    <p>Acompanhe sua carteira, rendimentos e evolução patrimonial.</p>
+
+    <!-- Mini chart bar -->
+    <div class="portfolio-chart">
+      <span style="flex:45; background: var(--lilac-500);"></span>
+      <span style="flex:30; background: var(--lilac-300);"></span>
+      <span style="flex:15; background: #7ee8a8;"></span>
+      <span style="flex:10; background: #fbbf24;"></span>
+    </div>
+    <div class="chart-legend">
+      <span class="chart-legend-item"><span class="legend-dot" style="background:var(--lilac-500)"></span>Tesouro (45%)</span>
+      <span class="chart-legend-item"><span class="legend-dot" style="background:var(--lilac-300)"></span>CDB (30%)</span>
+      <span class="chart-legend-item"><span class="legend-dot" style="background:#7ee8a8"></span>LCI (15%)</span>
+      <span class="chart-legend-item"><span class="legend-dot" style="background:#fbbf24"></span>Fundos (10%)</span>
+    </div>
+
+    <p class="app-section-label">Seus ativos</p>
+
+    <div class="holding-card">
+      <div class="holding-left">
+        <h4>🛡️ Tesouro Selic 2029</h4>
+        <p>Comprado em Jan/2026</p>
+      </div>
+      <div class="holding-right">
+        <strong>R$ 2.150,00</strong>
+        <small>+R$ 68,20</small>
+      </div>
+    </div>
+
+    <div class="holding-card">
+      <div class="holding-left">
+        <h4>🏦 CDB Banco Inter</h4>
+        <p>Comprado em Fev/2026</p>
+      </div>
+      <div class="holding-right">
+        <strong>R$ 1.435,00</strong>
+        <small>+R$ 42,15</small>
+      </div>
+    </div>
+
+    <div class="holding-card">
+      <div class="holding-left">
+        <h4>📈 LCI Banco do Brasil</h4>
+        <p>Comprado em Mar/2026</p>
+      </div>
+      <div class="holding-right">
+        <strong>R$ 718,00</strong>
+        <small>+R$ 12,30</small>
+      </div>
+    </div>
+
+    <div class="holding-card">
+      <div class="holding-left">
+        <h4>🌱 Fundo DI Nubank</h4>
+        <p>Comprado em Mar/2026</p>
+      </div>
+      <div class="holding-right">
+        <strong>R$ 479,30</strong>
+        <small>+R$ 4,80</small>
+      </div>
+    </div>
+
+    <p class="app-section-label">Reserva de emergência</p>
+
+    <div class="summary-card" style="margin-top:0;">
+      <p class="summary-label">Progresso da meta</p>
+      <p class="summary-value">R$ 2.450 <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted);">/ R$ 6.000</span></p>
+      <div class="progress-track" style="height:8px; margin-bottom:8px;">
+        <div class="progress-fill" style="width:41%;"></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-stat">
+          <small>Meses cobertos</small>
+          <span>1,2 de 3</span>
+        </div>
+        <div class="summary-stat">
+          <small>Falta</small>
+          <span>R$ 3.550</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1787,12 +2321,121 @@ p { line-height: 1.6; color: var(--text-muted); }
       </button>
     </div>
   </header>
-  <div class="app-content placeholder-page">
-    <div class="placeholder-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+
+  <div class="app-content">
+    <div class="community-tabs">
+      <button class="community-tab active">Recentes</button>
+      <button class="community-tab">Populares</button>
+      <button class="community-tab">Dúvidas</button>
     </div>
-    <h2>Comunidade de Mães</h2>
-    <p>Compartilhe experiências e aprenda com outras mães na jornada financeira.</p>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">A</div>
+        <div class="post-meta">
+          <strong>Ana Carolina</strong>
+          <small>Há 1 hora</small>
+        </div>
+      </div>
+      <div class="post-body">
+        Meninas, comecei a investir no Tesouro Selic há 3 meses com apenas R$ 50 por mês. Já tenho R$ 155 rendendo! Parece pouco mas é a primeira vez que tenho dinheiro guardado. Estou muito orgulhosa 💜
+      </div>
+      <div class="post-actions">
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          24
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          8
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Compartilhar
+        </button>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#f472b6,#db2777);">R</div>
+        <div class="post-meta">
+          <strong>Rafaela Santos</strong>
+          <small>Há 3 horas</small>
+        </div>
+      </div>
+      <div class="post-body">
+        Dúvida: alguém sabe a diferença entre LCI e LCA? Vi que ambas são isentas de IR mas não entendi quando escolher uma ou outra. Meu perfil é conservador.
+      </div>
+      <div class="post-actions">
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          12
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          15
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Compartilhar
+        </button>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#34d399,#059669);">J</div>
+        <div class="post-meta">
+          <strong>Juliana Oliveira</strong>
+          <small>Há 5 horas</small>
+        </div>
+      </div>
+      <div class="post-body">
+        Dica que funcionou pra mim: assim que recebo, já transfiro R$ 200 para a conta de investimentos. Se esperar sobrar no final do mês, nunca sobra. Paga você mesma primeiro! 🌸
+      </div>
+      <div class="post-actions">
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          47
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          21
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Compartilhar
+        </button>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#fbbf24,#d97706);">P</div>
+        <div class="post-meta">
+          <strong>Patrícia Lima</strong>
+          <small>Ontem</small>
+        </div>
+      </div>
+      <div class="post-body">
+        Consegui montar minha reserva de emergência de 3 meses em 8 meses! Quando comecei achava impossível. Obrigada Bloomnest e essa comunidade por todo apoio. Vocês são incríveis! 🌷
+      </div>
+      <div class="post-actions">
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          89
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          34
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Compartilhar
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
