@@ -1442,6 +1442,329 @@ p { line-height: 1.6; color: var(--text-muted); }
   color: var(--text-muted);
 }
 
+/* ── Plumas Daily Rewards ── */
+.plumas-section {
+  margin-bottom: 32px;
+}
+.plumas-section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--lilac-700);
+  margin-bottom: 4px;
+}
+.plumas-section-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Balance card */
+.plumas-balance-card {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #fef3c7 100%);
+  border: 1px solid rgba(155,89,182,0.12);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.plumas-balance-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(155,89,182,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.plumas-feather-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lilac-400), var(--lilac-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(155,89,182,0.25);
+  animation: featherFloat 3s ease-in-out infinite;
+}
+@keyframes featherFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(3deg); }
+}
+.plumas-balance-info {
+  flex: 1;
+}
+.plumas-balance-count {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--lilac-700);
+  line-height: 1.2;
+}
+.plumas-balance-count small {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--lilac-500);
+  margin-left: 4px;
+}
+.plumas-balance-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.plumas-streak-badge {
+  background: var(--lilac-600);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.plumas-streak-badge .streak-fire {
+  font-size: 0.8rem;
+}
+
+/* Weekly tracker */
+.plumas-week-tracker {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+.plumas-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+.plumas-day-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.plumas-day-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 2px dashed rgba(155,89,182,0.2);
+  background: #fff;
+  color: var(--text-muted);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+.plumas-day-circle.checked {
+  background: linear-gradient(135deg, var(--lilac-300), var(--lilac-500));
+  border: 2px solid var(--lilac-500);
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 10px rgba(155,89,182,0.2);
+}
+.plumas-day-circle.today {
+  border: 2px solid var(--lilac-400);
+  animation: todayPulse 2s ease-in-out infinite;
+}
+.plumas-day-circle.today.checked {
+  animation: todayCheckedGlow 2s ease-in-out infinite;
+}
+@keyframes todayPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(155,89,182,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(155,89,182,0.08); }
+}
+@keyframes todayCheckedGlow {
+  0%, 100% { box-shadow: 0 2px 10px rgba(155,89,182,0.25); }
+  50% { box-shadow: 0 2px 18px rgba(155,89,182,0.4); }
+}
+.plumas-day-circle.future {
+  opacity: 0.45;
+  border-style: dotted;
+}
+
+/* Check-in button */
+.plumas-checkin-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: none;
+  background: linear-gradient(135deg, var(--lilac-500), var(--lilac-600));
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 16px rgba(155,89,182,0.25);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.plumas-checkin-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(155,89,182,0.35);
+}
+.plumas-checkin-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.plumas-checkin-btn:disabled {
+  background: var(--dark-600);
+  color: var(--text-muted);
+  cursor: default;
+  box-shadow: none;
+}
+.plumas-checkin-btn .btn-feather {
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+.plumas-checkin-btn:hover:not(:disabled) .btn-feather {
+  transform: rotate(12deg) scale(1.15);
+}
+
+/* Check-in celebration */
+@keyframes plumaCollected {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.08); }
+  50% { transform: scale(0.96); }
+  70% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+@keyframes featherBurst {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.3) rotate(45deg); }
+}
+.plumas-checkin-btn.celebrating {
+  animation: plumaCollected 0.5s ease;
+}
+.feather-burst {
+  position: absolute;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: featherBurst 0.8s ease-out forwards;
+}
+
+/* Cashback rewards */
+.plumas-rewards-title {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--lilac-700);
+  margin-bottom: 4px;
+}
+.plumas-rewards-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.plumas-reward-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid rgba(155,89,182,0.08);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.55;
+}
+.plumas-reward-card.redeemable {
+  opacity: 1;
+  border-color: rgba(155,89,182,0.18);
+  background: linear-gradient(135deg, #fff 80%, #faf5ff 100%);
+}
+.plumas-reward-card.redeemable:hover {
+  border-color: rgba(155,89,182,0.3);
+  box-shadow: 0 2px 12px rgba(155,89,182,0.08);
+}
+.reward-emoji {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.reward-info {
+  flex: 1;
+}
+.reward-info h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 2px;
+}
+.reward-cashback {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #059669;
+}
+.reward-cost {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 2px;
+}
+.reward-redeem-btn {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+  background: var(--dark-600);
+  color: var(--text-muted);
+}
+.plumas-reward-card.redeemable .reward-redeem-btn {
+  background: linear-gradient(135deg, var(--lilac-500), var(--lilac-600));
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(155,89,182,0.2);
+}
+.plumas-reward-card.redeemable .reward-redeem-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 3px 12px rgba(155,89,182,0.3);
+}
+@keyframes redeemPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+.plumas-reward-card.just-redeemed {
+  animation: redeemPop 0.4s ease;
+}
+
 /* ══════════════════════════════
    RESPONSIVE
    ══════════════════════════════ */
@@ -1996,6 +2319,97 @@ p { line-height: 1.6; color: var(--text-muted); }
       <div class="profile-info-item">
         <small>Meta mensal</small>
         <span>R$ 300</span>
+      </div>
+    </div>
+
+    <!-- Plumas Daily Rewards -->
+    <div class="plumas-section">
+      <h3 class="plumas-section-title">Plumas Diárias</h3>
+      <p class="plumas-section-sub">Entre todo dia no app e ganhe plumas. Troque por cashback de verdade!</p>
+
+      <!-- Balance Card -->
+      <div class="plumas-balance-card">
+        <div class="plumas-feather-icon">🪶</div>
+        <div class="plumas-balance-info">
+          <div class="plumas-balance-count" id="plumas-total">47<small>plumas</small></div>
+          <div class="plumas-balance-hint">Cada dia seguido vale mais!</div>
+          <div class="plumas-streak-badge" id="plumas-streak-badge">
+            <span class="streak-fire">🔥</span>
+            <span id="plumas-streak-count">5 dias seguidos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekly Tracker -->
+      <div class="plumas-week-tracker" id="plumas-week-tracker">
+        <div class="plumas-day">
+          <span class="plumas-day-label">Seg</span>
+          <div class="plumas-day-circle" data-day="1"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Ter</span>
+          <div class="plumas-day-circle" data-day="2"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Qua</span>
+          <div class="plumas-day-circle" data-day="3"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Qui</span>
+          <div class="plumas-day-circle" data-day="4"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Sex</span>
+          <div class="plumas-day-circle" data-day="5"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Sáb</span>
+          <div class="plumas-day-circle" data-day="6"></div>
+        </div>
+        <div class="plumas-day">
+          <span class="plumas-day-label">Dom</span>
+          <div class="plumas-day-circle" data-day="0"></div>
+        </div>
+      </div>
+
+      <!-- Check-in Button -->
+      <button class="plumas-checkin-btn" id="plumas-checkin-btn" onclick="plumaCheckIn()">
+        <span class="btn-feather">🪶</span>
+        Coletar Pluma de Hoje
+      </button>
+
+      <!-- Cashback Rewards -->
+      <h4 class="plumas-rewards-title">Troque suas plumas</h4>
+      <p class="plumas-rewards-sub">Cashback de verdade pra quem entra todo dia</p>
+
+      <div class="plumas-reward-card" data-cost="30" id="reward-mercado">
+        <div class="reward-emoji" style="background: #fef3c7;">🛒</div>
+        <div class="reward-info">
+          <h4>Mercado</h4>
+          <span class="reward-cashback">R$ 10 de cashback</span>
+          <div class="reward-cost">🪶 30 plumas</div>
+        </div>
+        <button class="reward-redeem-btn" onclick="redeemReward('mercado', 30)">Resgatar</button>
+      </div>
+
+      <div class="plumas-reward-card" data-cost="25" id="reward-farmacia">
+        <div class="reward-emoji" style="background: #ede9fe;">💊</div>
+        <div class="reward-info">
+          <h4>Farmácia</h4>
+          <span class="reward-cashback">R$ 8 de cashback</span>
+          <div class="reward-cost">🪶 25 plumas</div>
+        </div>
+        <button class="reward-redeem-btn" onclick="redeemReward('farmacia', 25)">Resgatar</button>
+      </div>
+
+      <div class="plumas-reward-card" data-cost="50" id="reward-escolar">
+        <div class="reward-emoji" style="background: #d1fae5;">📚</div>
+        <div class="reward-info">
+          <h4>Material Escolar</h4>
+          <span class="reward-cashback">R$ 15 de cashback</span>
+          <div class="reward-cost">🪶 50 plumas</div>
+        </div>
+        <button class="reward-redeem-btn" onclick="redeemReward('escolar', 50)">Resgatar</button>
       </div>
     </div>
 
@@ -2810,6 +3224,179 @@ function profileBack() {
     window.location.hash = '#landing';
   }
 }
+
+// ── Plumas Daily Rewards ──
+function getPlumasData() {
+  const defaults = { totalPlumas: 47, streak: 5, lastCheckIn: null, weekCheckins: {} };
+  try {
+    const saved = JSON.parse(localStorage.getItem('bloomnest_plumas'));
+    return saved ? { ...defaults, ...saved } : defaults;
+  } catch { return defaults; }
+}
+
+function savePlumasData(data) {
+  localStorage.setItem('bloomnest_plumas', JSON.stringify(data));
+}
+
+function getTodayStr() {
+  return new Date().toISOString().split('T')[0];
+}
+
+function getWeekStart() {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = day === 0 ? 6 : day - 1; // Monday as start
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - diff);
+  monday.setHours(0, 0, 0, 0);
+  return monday.toISOString().split('T')[0];
+}
+
+function checkStreakValidity(data) {
+  if (!data.lastCheckIn) return data;
+  const last = new Date(data.lastCheckIn + 'T12:00:00');
+  const today = new Date(getTodayStr() + 'T12:00:00');
+  const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
+  if (diffDays > 1) {
+    data.streak = 0;
+    data.weekCheckins = {};
+  }
+  return data;
+}
+
+function updatePlumasUI() {
+  let data = getPlumasData();
+  data = checkStreakValidity(data);
+  const today = getTodayStr();
+  const todayDay = new Date().getDay();
+  const weekStart = getWeekStart();
+  const checkedToday = data.lastCheckIn === today;
+
+  // Update balance
+  document.getElementById('plumas-total').innerHTML = data.totalPlumas + '<small>plumas</small>';
+
+  // Update streak badge
+  const streakBadge = document.getElementById('plumas-streak-badge');
+  if (data.streak > 0) {
+    streakBadge.style.display = 'inline-flex';
+    document.getElementById('plumas-streak-count').textContent = data.streak + (data.streak === 1 ? ' dia seguido' : ' dias seguidos');
+  } else {
+    streakBadge.style.display = 'none';
+  }
+
+  // Update week circles
+  const circles = document.querySelectorAll('.plumas-day-circle');
+  circles.forEach(circle => {
+    const dayNum = parseInt(circle.dataset.day);
+    circle.classList.remove('checked', 'today', 'future');
+    circle.textContent = '';
+
+    // Determine if this day is today
+    if (dayNum === todayDay) {
+      circle.classList.add('today');
+    }
+
+    // Check if this day has been checked in this week
+    const dayKey = weekStart + '_' + dayNum;
+    if (data.weekCheckins && data.weekCheckins[dayKey]) {
+      circle.classList.add('checked');
+      circle.textContent = '🪶';
+    } else {
+      // Determine if future
+      const dayOrder = dayNum === 0 ? 6 : dayNum - 1; // Monday=0 ... Sunday=6
+      const todayOrder = todayDay === 0 ? 6 : todayDay - 1;
+      if (dayOrder > todayOrder) {
+        circle.classList.add('future');
+        circle.textContent = '·';
+      } else {
+        circle.textContent = '·';
+      }
+    }
+  });
+
+  // Update check-in button
+  const btn = document.getElementById('plumas-checkin-btn');
+  if (checkedToday) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="btn-feather">✓</span> Pluma coletada hoje!';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="btn-feather">🪶</span> Coletar Pluma de Hoje';
+  }
+
+  // Update reward cards
+  updateRewardCards(data.totalPlumas);
+}
+
+function updateRewardCards(total) {
+  document.querySelectorAll('.plumas-reward-card').forEach(card => {
+    const cost = parseInt(card.dataset.cost);
+    if (total >= cost) {
+      card.classList.add('redeemable');
+    } else {
+      card.classList.remove('redeemable');
+    }
+  });
+}
+
+function plumaCheckIn() {
+  let data = getPlumasData();
+  data = checkStreakValidity(data);
+  const today = getTodayStr();
+
+  if (data.lastCheckIn === today) return;
+
+  // Streak bonus: more consecutive days = more plumas
+  const bonus = Math.min(data.streak + 1, 5); // 1-5 bonus
+  data.totalPlumas += bonus;
+  data.streak += 1;
+  data.lastCheckIn = today;
+
+  // Mark this day of the week
+  const weekStart = getWeekStart();
+  const todayDay = new Date().getDay();
+  if (!data.weekCheckins) data.weekCheckins = {};
+  data.weekCheckins[weekStart + '_' + todayDay] = true;
+
+  savePlumasData(data);
+
+  // Celebration animation
+  const btn = document.getElementById('plumas-checkin-btn');
+  btn.classList.add('celebrating');
+
+  // Spawn feather burst particles
+  for (let i = 0; i < 5; i++) {
+    const feather = document.createElement('span');
+    feather.className = 'feather-burst';
+    feather.textContent = '🪶';
+    feather.style.left = (20 + Math.random() * 60) + '%';
+    feather.style.animationDelay = (i * 0.1) + 's';
+    btn.appendChild(feather);
+    setTimeout(() => feather.remove(), 1000);
+  }
+
+  setTimeout(() => btn.classList.remove('celebrating'), 600);
+
+  updatePlumasUI();
+}
+
+function redeemReward(type, cost) {
+  let data = getPlumasData();
+  if (data.totalPlumas < cost) return;
+
+  data.totalPlumas -= cost;
+  savePlumasData(data);
+
+  // Card animation
+  const card = document.getElementById('reward-' + type);
+  card.classList.add('just-redeemed');
+  setTimeout(() => card.classList.remove('just-redeemed'), 500);
+
+  updatePlumasUI();
+}
+
+// Init plumas on page load
+document.addEventListener('DOMContentLoaded', updatePlumasUI);
 </script>
 </body>
 </html>
