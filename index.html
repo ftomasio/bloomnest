@@ -1810,6 +1810,69 @@ p { line-height: 1.6; color: var(--text-muted); }
   animation: redeemPop 0.4s ease;
 }
 
+/* ── Premium Home Banner ── */
+.premium-home-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 40%, #fbbf24 100%);
+  border: 1.5px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 3px 16px rgba(245,158,11,0.18);
+}
+.premium-home-banner:hover {
+  box-shadow: 0 5px 24px rgba(245,158,11,0.28);
+  transform: translateY(-1px);
+}
+.premium-home-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.premium-home-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.15);
+}
+.premium-home-title {
+  font-family: 'Fraunces', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #78350f;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.premium-home-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  background: #78350f;
+  color: #fef3c7;
+  padding: 2px 7px;
+  border-radius: 8px;
+  letter-spacing: 0.04em;
+}
+.premium-home-sub {
+  font-size: 0.74rem;
+  color: #92400e;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
 /* ── Premium Mentoria Page ── */
 .premium-hero {
   text-align: center;
@@ -3183,6 +3246,18 @@ p { line-height: 1.6; color: var(--text-muted); }
       </div>
     </div>
 
+    <!-- Premium Mentoria Banner -->
+    <div class="premium-home-banner" onclick="navigateTo('premium')">
+      <div class="premium-home-left">
+        <div class="premium-home-icon">👩‍🏫</div>
+        <div>
+          <div class="premium-home-title">Mentoria Financeira <span class="premium-home-tag">★ PREMIUM</span></div>
+          <div class="premium-home-sub">Aulas exclusivas pra você aprender a cuidar do dinheiro no seu ritmo</div>
+        </div>
+      </div>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#78350f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><path d="M9 18l6-6-6-6"/></svg>
+    </div>
+
     <!-- Recommended -->
     <p class="app-section-label">Escolhidos para você</p>
 
@@ -3248,15 +3323,6 @@ p { line-height: 1.6; color: var(--text-muted); }
       </div>
     </div>
 
-    <!-- Premium Mentoria Banner -->
-    <div class="mentor-card" onclick="navigateTo('premium')" style="margin-top: 24px; cursor: pointer;">
-      <div class="mentor-avatar">👩‍🏫</div>
-      <div class="mentor-info">
-        <h4 style="display:flex;align-items:center;gap:6px;">Mentoria Financeira <span class="premium-badge" style="margin:0;font-size:0.55rem;padding:2px 8px;">★ PREMIUM</span></h4>
-        <p>Videoaulas exclusivas pra mães que querem aprender a cuidar do dinheiro.</p>
-      </div>
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--lilac-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M9 18l6-6-6-6"/></svg>
-    </div>
   </div>
 </div>
 
